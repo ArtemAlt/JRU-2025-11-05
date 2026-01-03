@@ -58,6 +58,7 @@ public class Main {
             
         */
       
-
+    AccountRepository accountRepository = new AccountRepository();
+    accountRepository.save(new Account(AccountType.CREDIT));
     }
 }
