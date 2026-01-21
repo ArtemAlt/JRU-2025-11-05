@@ -1,102 +1,117 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
+import java.io.Reader;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.OffsetDateTime;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Set;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+//        Date date1 = new Date(2023, 3, 11);
+//        System.out.println(date1);
 
-//        FileInputStream fis = new FileInputStream("file.txt");
-//        int bytesRead;
-//        while ((bytesRead = fis.read()) != -1) {
-//            System.out.println((char) bytesRead);
-//        }
+//        Date date2 = new Date(123, 2, 11);
+//        System.out.println(date2);
+//        date2.setYear(2000);
+//        System.out.println(date2);
+
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(2023, Calendar.JANUARY, 1);
+//        System.out.println(cal.getTime());
+
+//        cal.set(Calendar.MINUTE, 30);
+//        System.out.println(cal.getTime());
+
+//        cal.add(Calendar.DAY_OF_MONTH, +7);
+//        cal.add(Calendar.MONTH, -1);
+
+//        cal.set(2023, Calendar.JANUARY, 32);
+//        System.out.println(cal.getTime());
 //
-//        BufferedReader reader = new BufferedReader(
-//                new InputStreamReader(
-//                        new FileInputStream("data.txt")));
-//        String line;
-//        while ((line = reader.readLine()) != null) {
-//            System.out.println(line);
-//        }
+//        Calendar cal2 = Calendar.getInstance();
+//        cal2.set(2023, Calendar.FEBRUARY, 20);
 
-//        Path path = new File("./path.txt").toPath();
-//        Path path2 = Paths.get("new_path.txt");
-//        List<String> strings = Files.readAllLines(path);
-//        for (String s : strings) {
-//            System.out.println(s);
-//        }
-//        Path path1 = Path.of("file1.txt");
-//        Paths.get("file2.txt");
-//        Path path4 = Path.of("C:\\Users\\file.txt");
-//        Path path3 = Path.of("/home/user/docs");
-//        String separator = File.separator;
-//        C:\Documents\JUR-2025-11-05\src\123.txt
-//        /home/user/JUR-2025-11-05/src/123.txt
-//        path.getParent(); // папка где лежит файл
-//        path.getFileName();
-//        path.getRoot();
-//        path.getNameCount();
+//        LocalDate today = LocalDate.now();
+//        System.out.println(today);
+//        LocalDate localDate = LocalDate.of(2023, Month.JANUARY, 32);
+//        System.out.println(localDate);
 
-//        Files.createDirectory(Path.of("new", "new1", "new2", "new3"));
+//        LocalDate parse = LocalDate.parse("2023-12-30");
+//        System.out.println(parse);
 
-//        myMethod(new String[]{"1", "2", "3"});
-//        myMethod1("1", "2", "3");
+//        Month month = parse.getMonth();
+//        int year = parse.getYear();
+//        int monthValue = parse.getMonthValue();
+//        System.out.println(year + "-" + monthValue + "-" + month);
+//        LocalDate parse1 = parse.plusDays(1);
 
-//        Files.createFile(Path.of("src/1234.txt"));
+//        LocalTime localTime = LocalTime.now();
+//        System.out.println(localTime);
+//        LocalTime parse = LocalTime.parse("20:45:01");
+//        System.out.println(parse);
 
-//        List<String> strings = Files.readAllLines(Path.of("src/123.txt"));
-//        for(String s : strings) {
-//            System.out.println(s);
-//        }
-
-//        Files.writeString(Path.of("src/123.txt"),"Hello World");
-
-//        Files.write(Path.of("src/123.txt"), Arrays.asList("kjdghskgj", "sdfsddf", "bxzjcugdu"),
-//                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-
-//        Path path = Path.of("src/123.txt");
+//        LocalTime now = LocalTime.now();
+//        LocalTime startTime = LocalTime.of(9,0);
+//        LocalTime endTime = LocalTime.of(18,0);
 //
-//        System.out.println("Is file: " + Files.exists(path));
-//        System.out.println("Is file: " + Files.isRegularFile(path));
-//        System.out.println("Is dir: " + Files.isDirectory(path));
-//        System.out.println("Is file: " + Files.isReadable(path));
-//        System.out.println("Is file: " + Files.isWritable(path));
-//        System.out.println("File size: " + Files.size(path));
-//        System.out.println("File modified time: " + Files.getLastModifiedTime(path));
-
-//        try (Stream<Path> list = Files.list(Paths.get("."))){
-//            list.forEach(System.out::println);
+//        if (now.isAfter(startTime) && now.isBefore(endTime)) {
+//            System.out.println("Not working time");
 //        }
 
-//        Stream<Path> pathStream = Files.find(Paths.get("."),
-//                Integer.MAX_VALUE,
-//                (p, a) -> p.toString().endsWith(".txt"));
-//        pathStream.forEach(System.out::println);
+//        Duration duration = Duration.between(startTime, endTime);
+//        System.out.println("Duration: " + duration.toHours() + " hours");
 
-//        String property = System.getProperty("user.home");
-//        System.out.println("Property: " + property);
+//        LocalTime date1 = LocalTime.of(22,0);
+//        LocalTime date2 = LocalTime.of(6,0);
+//        System.out.println("Duration: " + Duration.between(date1, date2).toHours());
 
+//        LocalDateTime now = LocalDateTime.now();
+//        System.out.println(now);
+
+//        LocalDateTime localDateTime = LocalDateTime.of(2023, Month.JANUARY, 1, 0, 0, 0);
+//        System.out.println(localDateTime);
+//
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy HH:mm:ss");
+//        String format = localDateTime.format(formatter);
+//        System.out.println(format);
+
+//        LocalDateTime localDateTime2 = LocalDateTime.parse();
+
+//        Set<String> zone = ZoneId.getAvailableZoneIds();
+//        System.out.println(zone.size());
+
+//        ZonedDateTime america = ZonedDateTime.now(ZoneId.of("America/Los_Angeles"));
+//        ZonedDateTime def = ZonedDateTime.now(ZoneId.systemDefault());
+//        ZonedDateTime london = ZonedDateTime.now(ZoneId.of("Europe/London"));
+//        System.out.println(america);
+//        System.out.println(def);
+//        System.out.println(london);
+
+//        OffsetDateTime now = OffsetDateTime.now();
+//        Period period = Period.ofDays(1);
+//        Period period1 = Period.ofWeeks(5);
+//        System.out.println(period1.getDays());
+//        LocalDate start = LocalDate.of(2023, 1, 1);
+//        LocalDate end = LocalDate.of(2024, 7, 16);
+//        Period between = Period.between(start, end);
+//        System.out.println("Между " + start + " и " + end + ":");
+//        System.out.println(between.getYears() + " лет, " +
+//                between.getMonths() + " месяцев, " +
+//                between.getDays() + " дней");
+//        LocalDate plus = start.plus(Period.ofDays(1));
+//        System.out.println(plus);
+
+//        Date date = new Date();
+//        Instant instant = date.toInstant();
 
     }
-
-
-//    public static void myMethod(String[] arg) {
-//
-//    }
-
-//    public static void myMethod1(String ... arg) {
-//        arg[1] = "";
-//    }
-
 }
