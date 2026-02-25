@@ -33,4 +33,14 @@ public class GetItemInfoDto {
     public String getCreatedAt() {
         return createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "GetItemInfoDto{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", isActive=" + isActive +
+                ", createdAt='" + createdAt + '\'' +
+                '}';
+    }
 }

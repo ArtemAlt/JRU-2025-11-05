@@ -1,11 +1,16 @@
 package service;
 
+import exception.DuplicateException;
+import exception.ObjectNotFoundException;
+
+import java.util.Optional;
+
 public interface Manageable<T, I>{
 
-    T create(I args);
+    T create(I args) throws DuplicateException;
 
-    T getInfo();
+    Optional<T> getInfo(String name);
 
-    Boolean deactivate(T t);
+    Boolean deactivate(T t) throws ObjectNotFoundException;
 
 }

@@ -4,11 +4,14 @@ import dto.item.CreateItemDto;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * Единица меню
+ */
 public class Item {
     private final UUID id;
     private final String name;
     private final Integer price;
-    private final Boolean isActive;
+    private Boolean isActive;
     private final LocalDateTime createdAt;
 
     public Item(CreateItemDto args) {
@@ -37,5 +40,9 @@ public class Item {
 
     public UUID getId() {
         return id;
+    }
+
+    public void setIsActive(Boolean isActive){
+        this.isActive = isActive;
     }
 }
