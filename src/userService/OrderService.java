@@ -1,12 +1,12 @@
 package userService;
 
-import java.util.Arrays;
-import java.util.List;
 
 public class OrderService {
 
-    public List<String> loadUserOrders(int userId) throws InterruptedException {
+    public String loadUserOrders(int userId) throws InterruptedException {
+        System.out.println("Loading user orders");
         Thread.sleep(3000);
-        return Arrays.asList("Order#1", "Order#2", "Order#3");
+        System.out.println("Completed loading user orders");
+        return "Order#1" + "Order#2" + "Order#3";
     }
 }

@@ -1,5 +1,6 @@
 package userService;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -29,30 +30,38 @@ public class UserInfoAggregator {
 //        String s = profileService.loadUserProfile(userId);
 //        Map<String, String> stringStringMap = userDetailsService.loadUserProfile(userId);
 
-        Future<List<String>> submit1 = executorService.submit(() -> orderService.loadUserOrders(userId));
+        Future<String>submit1 = executorService.submit(() -> orderService.loadUserOrders(userId));
         Future<String> submit2 = executorService.submit(() -> profileService.loadUserProfile(userId));
-        Future<Map<String, String>> submit3 = executorService.submit(() -> userDetailsService.loadUserProfile(userId));
+        Future<String> submit3 = executorService.submit(() -> userDetailsService.loadUserProfile(userId));
 
-        List<Future> allFutures = Arrays.asList(submit1, submit2, submit3);
-        Iterator<Future> iterator = allFutures.iterator();
+        List<Future<String>> allFutures = new ArrayList<>(Arrays.asList(submit1, submit2, submit3));
         List<String> results = new ArrayList<>();
-        while (iterator.hasNext()) {
-            System.out.println("While running");
-            Future next = iterator.next();
-            if (next.isDone()) {
-                System.out.println("Future is Done");
-                try {
-                    Object o = next.get();
-                    results.add(o.toString());
-                    System.out.println("Future result " + o.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    iterator.remove();
+        LocalDateTime start = LocalDateTime.now();
+        System.out.println("Start running time: " + start);
+
+        while (!allFutures.isEmpty()) {
+            Iterator<Future<String>> iterator = allFutures.iterator();
+            while (iterator.hasNext()) {
+                Future<String> next = iterator.next();
+
+                if (next.isDone()) {
+                    try {
+                        String result = next.get();
+                        results.add(result);
+                        iterator.remove(); // Удаляем завершённую задачу
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        iterator.remove();
+                    }
                 }
-                iterator.remove();
             }
+            Thread.sleep(100);
         }
-        System.out.println("results " + results);
+
+        LocalDateTime end = LocalDateTime.now();
+        System.out.println("End running time: " + end);
+        System.out.println("All results: " + results);
+        System.out.println("results " + results.size());
         executorService.shutdown();
     }
 }
